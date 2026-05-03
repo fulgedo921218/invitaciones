@@ -50,11 +50,16 @@
               <label class="block mb-1 text-sm font-semibold">Color texto secciones</label>
               <input v-model="form.styles.textSectionColor" placeholder="Color texto secciones" class="input" />
             </div>
+            <div>
+              <label class="block mb-1 text-sm font-semibold">Tipo de letra principal</label>
+              <select v-model="form.styles.fontFamily" class="input w-full mb-1" :style="{fontFamily: form.styles.fontFamily || 'inherit', fontSize: '1.1em', height: '2.6em'}">
+                <option v-for="font in fontOptions" :key="font.value" :value="font.value" :style="{fontFamily: font.value}">{{ font.label }}</option>
+              </select>
+            </div>
             <div class="md:col-span-2">
               <label class="block mb-1 text-sm font-semibold">Imagen portada URL</label>
               <input v-model="form.media.heroImage" placeholder="Imagen portada URL" class="input" />
             </div>
-            <!-- Eliminado: Selector global de fuente principal -->
           </div>
         </div>
 
@@ -137,10 +142,17 @@
         <!-- SECCIÓN COUNTDOWN -->
         <div class="mb-8" v-if="form.sections.countdown">
           <h2 class="text-xl font-bold mb-4 border-b border-white/20 pb-2">Sección Countdown</h2>
-          <div class="grid md:grid-cols-2 gap-8">
+          <div class="grid md:grid-cols-3 gap-8">
             <div>
               <label class="block mb-1 text-sm font-semibold">Fecha para countdown <span class="opacity-60 text-xs">(Ej: 2026-04-20T19:00:00)</span></label>
               <input v-model="form.dateISO" placeholder="2026-04-20T19:00:00" class="input" style="font-size:1.1em;height:3.2em" />
+            </div>
+            <div>
+              <label class="block mb-1 text-sm font-semibold">Tipo de contador</label>
+              <select v-model="form.countdownType" class="input">
+                <option value="classic">Clásico (cuadros)</option>
+                <option value="inline">En línea (15. 05. 13. 14)</option>
+              </select>
             </div>
           </div>
         </div>

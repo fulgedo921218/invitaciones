@@ -25,73 +25,73 @@
 import { computed, ref, onMounted, onUnmounted, defineComponent, h, Transition } from 'vue'
 // Helper: List of section renderers in order
 const sectionRenderers = [
-    { key: 'location', component: defineComponent({
-      props: ['sectionIndex'],
-      setup(props) {
-        return () => {
-          if (!safeEvent.value.sections.location) return null
-          // Render ceremonia y recepción si están activos
-          const blocks = []
-          if (safeEvent.value.ceremoniaVisible) {
-            blocks.push(
-              h('div', { class: 'mb-10' }, [
-                h('div', {
-                  class: 'text-3xl font-serif tracking-widest mb-2',
-                  style: { fontFamily: safeEvent.value.locationFonts?.ceremoniaTitulo || 'inherit' }
-                }, safeEvent.value.ceremoniaTitulo || 'CEREMONIA'),
-                h('div', {
-                  class: 'text-lg mb-2',
-                  style: { fontFamily: safeEvent.value.locationFonts?.ceremoniaHora || 'inherit' }
-                }, safeEvent.value.ceremoniaHora),
-                h('div', {
-                  class: 'mb-2',
-                  style: { fontFamily: safeEvent.value.locationFonts?.ceremoniaLugar || 'inherit' }
-                }, safeEvent.value.ceremoniaLugar),
-                h('div', {
-                  class: 'mb-2',
-                  style: { fontFamily: safeEvent.value.locationFonts?.ceremoniaDireccion || 'inherit' }
-                }, safeEvent.value.ceremoniaDireccion),
-                safeEvent.value.ceremoniaMapa ? h('a', { href: safeEvent.value.ceremoniaMapa, target: '_blank', class: 'inline-block border border-[#b97b7b] px-6 py-2 rounded mt-2 hover:bg-[#b97b7b] hover:text-white transition' }, 'VER MAPA') : null
-              ])
-            )
-          }
-          if (safeEvent.value.recepcionVisible) {
-            blocks.push(
-              h('div', {}, [
-                h('div', {
-                  class: 'text-3xl font-serif tracking-widest mb-2',
-                  style: { fontFamily: safeEvent.value.locationFonts?.recepcionTitulo || 'inherit' }
-                }, 'RECEPCIÓN'),
-                h('div', {
-                  class: 'text-lg mb-2',
-                  style: { fontFamily: safeEvent.value.locationFonts?.recepcionHora || 'inherit' }
-                }, safeEvent.value.recepcionHora),
-                h('div', {
-                  class: 'mb-2',
-                  style: { fontFamily: safeEvent.value.locationFonts?.recepcionLugar || 'inherit' }
-                }, safeEvent.value.recepcionLugar),
-                h('div', {
-                  class: 'mb-2',
-                  style: { fontFamily: safeEvent.value.locationFonts?.recepcionDireccion || 'inherit' }
-                }, safeEvent.value.recepcionDireccion),
-                safeEvent.value.recepcionMapa ? h('a', { href: safeEvent.value.recepcionMapa, target: '_blank', class: 'inline-block border border-[#b97b7b] px-6 py-2 rounded mt-2 hover:bg-[#b97b7b] hover:text-white transition' }, 'VER MAPA') : null
-              ])
-            )
-          }
-          if (!blocks.length) return null
-          return h('section', {
-            style: {
-              background: props.sectionIndex % 2 === 0 ? safeEvent.value.styles.bgColor : safeEvent.value.styles.bgSectionColor,
-              color: safeEvent.value.styles.accentColor || '#b97b7b'
-            },
-            class: 'py-20 px-6 text-center'
-          }, [
-            h('div', { class: 'text-4xl font-serif tracking-widest mb-8' }, 'CEREMONIA Y RECEPCIÓN'),
-            ...blocks
-          ])
+  { key: 'location', component: defineComponent({
+    props: ['sectionIndex'],
+    setup(props) {
+      return () => {
+        if (!safeEvent.value.sections.location) return null
+        // Render ceremonia y recepción si están activos
+        const blocks = []
+        if (safeEvent.value.ceremoniaVisible) {
+          blocks.push(
+            h('div', { class: 'mb-10' }, [
+              h('div', {
+                class: 'text-3xl font-serif tracking-widest mb-2',
+                style: { fontFamily: safeEvent.value.locationFonts?.ceremoniaTitulo || 'inherit' }
+              }, safeEvent.value.ceremoniaTitulo || 'CEREMONIA'),
+              h('div', {
+                class: 'text-lg mb-2',
+                style: { fontFamily: safeEvent.value.locationFonts?.ceremoniaHora || 'inherit' }
+              }, safeEvent.value.ceremoniaHora),
+              h('div', {
+                class: 'mb-2',
+                style: { fontFamily: safeEvent.value.locationFonts?.ceremoniaLugar || 'inherit' }
+              }, safeEvent.value.ceremoniaLugar),
+              h('div', {
+                class: 'mb-2',
+                style: { fontFamily: safeEvent.value.locationFonts?.ceremoniaDireccion || 'inherit' }
+              }, safeEvent.value.ceremoniaDireccion),
+              safeEvent.value.ceremoniaMapa ? h('a', { href: safeEvent.value.ceremoniaMapa, target: '_blank', class: `inline-block border px-6 py-2 rounded mt-2 hover:bg-[${safeEvent.value.styles.bgSectionColor}] hover:text-white transition`, style: { borderColor: safeEvent.value.styles.bgSectionColor } }, 'VER MAPA') : null
+            ])
+          )
         }
+        if (safeEvent.value.recepcionVisible) {
+          blocks.push(
+            h('div', {}, [
+              h('div', {
+                class: 'text-3xl font-serif tracking-widest mb-2',
+                style: { fontFamily: safeEvent.value.locationFonts?.recepcionTitulo || 'inherit' }
+              }, 'RECEPCIÓN'),
+              h('div', {
+                class: 'text-lg mb-2',
+                style: { fontFamily: safeEvent.value.locationFonts?.recepcionHora || 'inherit' }
+              }, safeEvent.value.recepcionHora),
+              h('div', {
+                class: 'mb-2',
+                style: { fontFamily: safeEvent.value.locationFonts?.recepcionLugar || 'inherit' }
+              }, safeEvent.value.recepcionLugar),
+              h('div', {
+                class: 'mb-2',
+                style: { fontFamily: safeEvent.value.locationFonts?.recepcionDireccion || 'inherit' }
+              }, safeEvent.value.recepcionDireccion),
+              safeEvent.value.recepcionMapa ? h('a', { href: safeEvent.value.recepcionMapa, target: '_blank', class: `inline-block border px-6 py-2 rounded mt-2 hover:bg-[${safeEvent.value.styles.bgSectionColor}] hover:text-white transition`, style: { borderColor: safeEvent.value.styles.bgSectionColor } }, 'VER MAPA') : null
+            ])
+          )
+        }
+        if (!blocks.length) return null
+        return h('section', {
+          style: {
+            background: props.sectionIndex % 2 === 0 ? safeEvent.value.styles.bgColor : safeEvent.value.styles.bgSectionColor,
+            color: safeEvent.value.styles.accentColor || '#b97b7b'
+          },
+          class: 'py-20 px-6 text-center'
+        }, [
+          h('div', { class: 'text-4xl font-serif tracking-widest mb-8' }, 'CEREMONIA Y RECEPCIÓN'),
+          ...blocks
+        ])
       }
-    }) },
+    }
+  }) },
   { key: 'hero', component: defineComponent({
     props: ['sectionIndex'],
     setup(props) {
@@ -135,8 +135,8 @@ const sectionRenderers = [
           }, 'Para tu mayor comodidad hemos seleccionado algunos hoteles para tu estadía'),
           h('div', { class: 'grid md:grid-cols-3 gap-8 max-w-6xl mx-auto' },
             safeEvent.value.hospedaje.map((hotel, i) =>
-              h('div', { key: i, class: 'bg-white/60 rounded-3xl p-4 flex flex-col items-center' }, [
-                h('img', { src: hotel.imagen, alt: hotel.nombre, class: 'rounded-3xl border-4 border-[#e2c6b7] mb-4', style: 'height:180px;object-fit:cover;' }),
+              h('div', { key: i, class: `border rounded-3xl p-4 flex flex-col items-center`, style: { borderColor: safeEvent.value.styles.bgSectionColor } }, [
+                h('img', { src: hotel.imagen, alt: hotel.nombre, class: `rounded-3xl border-4 mb-4`, style: { height: '180px', objectFit: 'cover', borderColor: safeEvent.value.styles.bgSectionColor } }),
                 h('div', {
                   class: 'font-semibold tracking-wide mb-1',
                   style: { fontFamily: safeEvent.value.hospedajeFonts?.nombre || 'inherit' }
@@ -148,8 +148,8 @@ const sectionRenderers = [
                 hotel.mapa ? h('a', {
                   href: hotel.mapa,
                   target: '_blank',
-                  class: 'inline-block border border-[#b97b7b] px-6 py-2 rounded mt-2 hover:bg-[#b97b7b] hover:text-white transition',
-                  style: { fontFamily: safeEvent.value.hospedajeFonts?.boton || 'inherit' }
+                  class: `inline-block border border-[${safeEvent.value.styles.bgSectionColor}] px-6 py-2 rounded mt-2 hover:bg-[${safeEvent.value.styles.bgSectionColor}] hover:text-white transition`,
+                  style: { fontFamily: safeEvent.value.hospedajeFonts?.boton || 'inherit', borderColor: safeEvent.value.styles.bgSectionColor }
                 }, 'VER MAPA') : null
               ])
             )
@@ -166,14 +166,14 @@ const sectionRenderers = [
         return h('section', {
           style: {
             background: props.sectionIndex % 2 === 0 ? safeEvent.value.styles.bgColor : safeEvent.value.styles.bgSectionColor,
-            color: safeEvent.value.styles.accentColor || '#b97b7b'
+            color: safeEvent.value.styles.textSectionColor || safeEvent.value.styles.textSectionColor
           },
           class: 'py-20 px-6 text-center'
         }, [
           h('div', { class: 'flex flex-col items-center mb-8' }, [
             h('svg', { width: '60', height: '60', fill: 'none', viewBox: '0 0 60 60', class: 'mb-4' }, [
-              h('rect', { x: '10', y: '10', width: '40', height: '40', rx: '12', stroke: '#b97b7b', 'stroke-width': '3', fill: 'none' }),
-              h('circle', { cx: '30', cy: '30', r: '12', stroke: '#b97b7b', 'stroke-width': '3', fill: 'none' }),
+              h('rect', { x: '10', y: '10', width: '40', height: '40', rx: '12', stroke: safeEvent.value.styles.textSectionColor, 'stroke-width': '3', fill: 'none' }),
+              h('circle', { cx: '30', cy: '30', r: '12', stroke: safeEvent.value.styles.textSectionColor, 'stroke-width': '3', fill: 'none' }),
               h('circle', { cx: '42', cy: '18', r: '2', fill: '#e2c6b7' })
             ]),
             h('div', {
@@ -192,8 +192,8 @@ const sectionRenderers = [
           safeEvent.value.instagramUsuario ? h('a', {
             href: `https://instagram.com/${safeEvent.value.instagramUsuario}`,
             target: '_blank',
-            class: 'inline-block border border-[#b97b7b] px-8 py-3 rounded  hover:bg-[#b97b7b] hover:text-white transition font-semibold',
-            style: { fontFamily: safeEvent.value.instagramFonts?.boton || 'inherit' }
+            class: `inline-block border px-8 py-3 rounded  hover:bg-[${safeEvent.value.styles.textSectionColor}] hover:text-white transition font-semibold`,
+            style: { fontFamily: safeEvent.value.instagramFonts?.boton || 'inherit', borderColor: safeEvent.value.styles.textSectionColor }
           }, 'MI INSTA') : null
         ])
       }
@@ -216,7 +216,6 @@ const sectionRenderers = [
       ])
     }
   }) },
-
   { key: 'recomendaciones', component: defineComponent({
     props: ['sectionIndex'],
     setup(props) {
@@ -225,7 +224,7 @@ const sectionRenderers = [
         return h('section', {
           style: {
             background: props.sectionIndex % 2 === 0 ? safeEvent.value.styles.bgColor : safeEvent.value.styles.bgSectionColor,
-            color: safeEvent.value.styles.accentColor || '#b97b7b'
+            color: safeEvent.value.styles.textSectionColor || '#b97b7b'
           },
           class: 'py-20 px-6 text-center'
         }, [
@@ -238,9 +237,9 @@ const sectionRenderers = [
             style: { fontFamily: safeEvent.value.recomendacionesFonts?.subtitulo || 'inherit' }
           }, 'DEL EVENTO'),
           h('div', { class: 'flex flex-col items-center mb-6' }, [
-            h('svg', { width: '60', height: '60', fill: '#b97b7b', viewBox: '0 0 60 60', class: 'mb-4' }, [
-              h('path', { d: 'M20 50 L30 10 L40 50', stroke: '#b97b7b', 'stroke-width': '3', fill: 'none' }),
-              h('rect', { x: '18', y: '40', width: '24', height: '10', rx: '2', fill: '#b97b7b' })
+            h('svg', { width: '60', height: '60', fill: safeEvent.value.styles.textSectionColor, viewBox: '0 0 60 60', class: 'mb-4' }, [
+              h('path', { d: 'M20 50 L30 10 L40 50', stroke: safeEvent.value.styles.textSectionColor, 'stroke-width': '3', fill: 'none' }),
+              h('rect', { x: '18', y: '40', width: '24', height: '10', rx: '2', fill: safeEvent.value.styles.textSectionColor })
             ])
           ]),
           h('div', {
@@ -260,9 +259,9 @@ const sectionRenderers = [
             style: { fontFamily: safeEvent.value.recomendacionesFonts?.mujeres || 'inherit' }
           }, `Mujeres: ${safeEvent.value.recomendacionesMujeres}`),
           h('div', { class: 'flex flex-col items-center mb-8' }, [
-            h('div', { class: 'w-1 h-12 bg-[#b97b7b] mx-auto mb-4' }),
-            h('svg', { width: '50', height: '50', fill: '#b97b7b', viewBox: '0 0 50 50', class: 'mb-4' }, [
-              h('path', { d: 'M25 10 Q30 20 25 40 Q20 20 25 10 Z', fill: '#b97b7b' })
+            h('div', { class: `w-1 h-12 bg-[${safeEvent.value.styles.textSectionColor}] mx-auto mb-4` }),
+            h('svg', { width: '50', height: '50', fill: safeEvent.value.styles.textSectionColor, viewBox: '0 0 50 50', class: 'mb-4' }, [
+              h('path', { d: 'M25 10 Q30 20 25 40 Q20 20 25 10 Z', fill: safeEvent.value.styles.textSectionColor })
             ])
           ]),
           h('div', {
@@ -270,10 +269,10 @@ const sectionRenderers = [
             style: { fontFamily: safeEvent.value.recomendacionesFonts?.color || 'inherit' }
           }, safeEvent.value.recomendacionesColor),
           h('div', { class: 'flex flex-col items-center mb-4' }, [
-            h('div', { class: 'w-1 h-12 bg-[#b97b7b] mx-auto mb-4' }),
+            h('div', { class: `w-1 h-12 bg-[${safeEvent.value.styles.textSectionColor}] mx-auto mb-4` }),
             h('svg', { width: '40', height: '40', fill: 'none', viewBox: '0 0 40 40' }, [
-              h('circle', { cx: '20', cy: '20', r: '18', stroke: '#b97b7b', 'stroke-width': '2' }),
-              h('path', { d: 'M20 12v8l6 4', stroke: '#b97b7b', 'stroke-width': '2', 'stroke-linecap': 'round' })
+              h('circle', { cx: '20', cy: '20', r: '18', stroke: safeEvent.value.styles.textSectionColor, 'stroke-width': '2' }),
+              h('path', { d: 'M20 12v8l6 4', stroke: safeEvent.value.styles.textSectionColor, 'stroke-width': '2', 'stroke-linecap': 'round' })
             ])
           ]),
           h('div', {
@@ -298,12 +297,12 @@ const sectionRenderers = [
         }, [
           h('div', { class: 'flex flex-col items-center mb-8' }, [
             h('svg', { width: '60', height: '60', fill: 'none', viewBox: '0 0 60 60', class: 'mb-4' }, [
-              h('rect', { x: '10', y: '22', width: '40', height: '25', rx: '4', fill: 'none', stroke: '#b97b7b', 'stroke-width': '2.5' }),
-              h('rect', { x: '18', y: '12', width: '24', height: '12', rx: '6', fill: 'none', stroke: '#b97b7b', 'stroke-width': '2.5' }),
-              h('path', { d: 'M30 22V12', stroke: '#b97b7b', 'stroke-width': '2.5' }),
-              h('path', { d: 'M10 32h40', stroke: '#b97b7b', 'stroke-width': '2.5' }),
-              h('circle', { cx: '45', cy: '15', r: '2', fill: '#e2c6b7' }),
-              h('circle', { cx: '15', cy: '45', r: '1.5', fill: '#e2c6b7' })
+              h('rect', { x: '10', y: '22', width: '40', height: '25', rx: '4', fill: 'none', stroke: safeEvent.value.styles.bgSectionColor, 'stroke-width': '2.5' }),
+              h('rect', { x: '18', y: '12', width: '24', height: '12', rx: '6', fill: 'none', stroke: safeEvent.value.styles.bgSectionColor, 'stroke-width': '2.5' }),
+              h('path', { d: 'M30 22V12', stroke: safeEvent.value.styles.bgSectionColor, 'stroke-width': '2.5' }),
+              h('path', { d: 'M10 32h40', stroke: safeEvent.value.styles.bgSectionColor, 'stroke-width': '2.5' }),
+              h('circle', { cx: '45', cy: '15', r: '2', fill: safeEvent.value.styles.bgSectionColor }),
+              h('circle', { cx: '15', cy: '45', r: '1.5', fill: safeEvent.value.styles.bgSectionColor })
             ]),
             h('div', [
               h('div', {
@@ -320,10 +319,10 @@ const sectionRenderers = [
             safeEvent.value.regalos.map((regalo, idx) =>
               h('div', { key: idx, class: 'flex flex-col items-center' }, [
                 regalo.tipo === 'sobres' ? h('svg', { width: '50', height: '50', fill: 'none', viewBox: '0 0 50 50', class: 'mb-2' }, [
-                  h('rect', { x: '7', y: '15', width: '36', height: '24', rx: '4', fill: 'none', stroke: '#b97b7b', 'stroke-width': '2' }),
-                  h('polyline', { points: '7,15 25,32 43,15', fill: 'none', stroke: '#b97b7b', 'stroke-width': '2' }),
-                  h('path', { d: 'M25 32 L25 39', stroke: '#b97b7b', 'stroke-width': '2' }),
-                  h('path', { d: 'M17 23 Q25 29 33 23', stroke: '#b97b7b', 'stroke-width': '2' }),
+                  h('rect', { x: '7', y: '15', width: '36', height: '24', rx: '4', fill: 'none', stroke: safeEvent.value.styles.bgSectionColor, 'stroke-width': '2' }),
+                  h('polyline', { points: '7,15 25,32 43,15', fill: 'none', stroke: safeEvent.value.styles.bgSectionColor, 'stroke-width': '2' }),
+                  h('path', { d: 'M25 32 L25 39', stroke: safeEvent.value.styles.bgSectionColor, 'stroke-width': '2' }),
+                  h('path', { d: 'M17 23 Q25 29 33 23', stroke: safeEvent.value.styles.bgSectionColor, 'stroke-width': '2' }),
                   h('circle', { cx: '25', cy: '12', r: '2', fill: '#e2c6b7' }),
                   h('circle', { cx: '15', cy: '35', r: '1.2', fill: '#e2c6b7' })
                 ]) : null,
@@ -335,7 +334,7 @@ const sectionRenderers = [
                   class: 'text-xl font-serif italic  -mt-2 mb-4',
                   style: { fontFamily: safeEvent.value.regalosFonts?.lluviaSubtitulo || 'inherit' }
                 }, 'SOBRES') : null,
-                regalo.tipo === 'transferencia' ? h('div', { class: 'border-2 border-[#b97b7b] rounded-lg p-6 w-full max-w-xs ' }, [
+                regalo.tipo === 'transferencia' ? h('div', { class: `border-2 rounded-lg p-6 w-full max-w-xs`, style: { borderColor: safeEvent.value.styles.bgSectionColor } }, [
                   h('div', {
                     class: 'text-sm font-semibold mb-1',
                     style: { fontFamily: safeEvent.value.regalosFonts?.banco || 'inherit' }
@@ -451,7 +450,7 @@ const sectionRenderers = [
         return h('section', {
           style: {
             background: props.sectionIndex % 2 === 0 ? safeEvent.value.styles.bgColor : safeEvent.value.styles.bgSectionColor,
-            color: safeEvent.value.styles.accentColor || '#b97b7b'
+            color: safeEvent.value.styles.accentColor || safeEvent.value.styles.textSectionColor
           },
           class: 'flex flex-col items-center justify-center px-6 py-16 max-w-5xl mx-auto'
         }, [
@@ -463,7 +462,7 @@ const sectionRenderers = [
             }, [
               h('svg', { width: 32, height: 32, viewBox: '0 0 32 32', fill: 'none' }, [
                 h('circle', { cx: 16, cy: 16, r: 16, fill: 'none' }),
-                h('path', { d: 'M20 8L12 16L20 24', stroke: '#b97b7b', 'stroke-width': '3', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', fill: 'none' })
+                h('path', { d: 'M20 8L12 16L20 24', stroke: safeEvent.value.styles.textSectionColor, 'stroke-width': '3', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', fill: 'none' })
               ])
             ]),
             h('div', {
@@ -496,13 +495,13 @@ const sectionRenderers = [
               )
             ]),
             h('button', {
-              class: 'absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 border border-[#b97b7b] rounded-full p-3 shadow-lg hover:bg-[#b97b7b] hover:text-white transition',
+              class: `absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 border border-[${safeEvent.value.styles.textSectionColor}] rounded-full p-3 shadow-lg hover:bg-[${safeEvent.value.styles.textSectionColor}] hover:text-white transition`,
               onClick: next,
               style: 'z-index:2; font-size:2rem;'
             }, [
               h('svg', { width: 32, height: 32, viewBox: '0 0 32 32', fill: 'none' }, [
                 h('circle', { cx: 16, cy: 16, r: 16, fill: 'none' }),
-                h('path', { d: 'M12 8L20 16L12 24', stroke: '#b97b7b', 'stroke-width': '3', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', fill: 'none' })
+                h('path', { d: 'M12 8L20 16L12 24', stroke: safeEvent.value.styles.textSectionColor, 'stroke-width': '3', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', fill: 'none' })
               ])
             ])
           ]),
@@ -512,7 +511,7 @@ const sectionRenderers = [
                 key: idx,
                 class: [
                   'inline-block w-4 h-4 rounded-full border',
-                  idx === current.value ? 'bg-[#b97b7b] border-[#b97b7b]' : 'bg-gray-200 border-gray-300'
+                  idx === current.value ? `bg-[${safeEvent.value.styles.textSectionColor}] border-[${safeEvent.value.styles.textSectionColor}]` : 'bg-gray-200 border-gray-300'
                 ],
                 style: 'transition:background 0.2s;'
               })
@@ -539,18 +538,41 @@ const sectionRenderers = [
   { key: 'countdown', component: defineComponent({
     props: ['sectionIndex'],
     setup() {
-      return () => h('section', {
-        style: {
-          background: safeEvent.value.styles.bgColor,
-          color: safeEvent.value.styles.textColor
-        },
-        class: 'grid grid-cols-2 md:grid-cols-4 gap-6 text-center px-6 py-16 max-w-4xl mx-auto'
-      }, countdown.value.map((item, i) =>
-        h('div', { key: i, class: 'bg-white/10 rounded-xl p-6' }, [
-          h('p', { class: 'text-3xl font-bold text-[#c6a97a]' }, item.value),
-          h('p', { class: 'text-sm opacity-60 uppercase' }, item.label)
-        ])
-      ))
+      return () => {
+        const type = safeEvent.value.countdownType || 'classic'
+        if (type === 'inline') {
+          return h('section', {
+            style: {
+              background: safeEvent.value.styles.bgColor,
+              color: safeEvent.value.styles.textColor
+            },
+            class: 'text-center px-6 py-16 max-w-4xl mx-auto'
+          }, [
+            h('div', { class: 'flex justify-center items-end gap-2 mb-2' },
+              countdown.value.map((item, i) => [
+                h('div', { key: 'num-' + i, class: 'flex flex-col items-center' }, [
+                  h('span', { class: 'text-5xl font-bold', style: { color: safeEvent.value.styles.accentColor, letterSpacing: '0.05em' } }, String(item.value).padStart(2, '0')),
+                  h('span', { class: 'text-base font-semibold opacity-70 mt-2', style: { letterSpacing: '0.05em' } }, item.label.toLowerCase())
+                ]),
+                i < countdown.value.length - 1 ? h('span', { key: 'sep-' + i, class: 'text-5xl font-bold mx-1 mb-6', style: { color: safeEvent.value.styles.accentColor } }, ':') : null
+              ])
+            )
+          ])
+        }
+        // Clásico (cuadros)
+        return h('section', {
+          style: {
+            background: safeEvent.value.styles.bgColor,
+            color: safeEvent.value.styles.textColor
+          },
+          class: 'grid grid-cols-2 md:grid-cols-4 gap-6 text-center px-6 py-16 max-w-4xl mx-auto'
+        }, countdown.value.map((item, i) =>
+          h('div', { key: i, class: 'bg-white/10 rounded-xl p-6' }, [
+            h('p', { class: 'text-3xl font-bold text-[#c6a97a]' }, item.value),
+            h('p', { class: 'text-sm opacity-60 uppercase' }, item.label)
+          ])
+        ))
+      }
     }
   }) },
   { key: 'detalles', component: defineComponent({
@@ -564,15 +586,15 @@ const sectionRenderers = [
         class: 'text-center py-16 px-6 font-serif'
       }, [
         h('p', { class: 'italic text-lg mb-4 font-sans', style: { fontFamily: safeEvent.value.detallesFonts?.superior || 'serif' } }, safeEvent.value.detallesSuperior || 'Tenemos el honor de invitarlos a'),
-        h('div', { class: 'text-6xl md:text-7xl font-bold mb-6 tracking-widest', style: { color: safeEvent.value.styles.accentColor, letterSpacing: '0.1em', fontFamily: safeEvent.value.detallesFonts?.principal || 'inherit' } }, safeEvent.value.detallesPrincipal || 'CELEBRAR'),
+        h('div', { class: 'text-6xl md:text-7xl font-bold mb-6 tracking-widest', style: { color: safeEvent.value.styles.textSectionColor, letterSpacing: '0.1em', fontFamily: safeEvent.value.detallesFonts?.principal || 'inherit' } }, safeEvent.value.detallesPrincipal || 'CELEBRAR'),
         h('div', { class: 'flex flex-col items-center mb-2' }, [
           h('div', { class: 'flex items-center justify-center w-full mb-2' }, [
-            safeEvent.value.detallesSubtitulo ? h('span', { class: 'text-xl md:text-2xl tracking-widest mr-4', style: { color: safeEvent.value.styles.accentColor, fontFamily: safeEvent.value.detallesFonts?.subtitulo || 'inherit' } }, safeEvent.value.detallesSubtitulo) : null,
-            h('span', { class: 'text-6xl md:text-7xl font-serif mx-4', style: { color: safeEvent.value.styles.accentColor } }, getDay(safeEvent.value.dateISO)),
-            h('span', { class: 'text-xl md:text-2xl tracking-widest ml-4', style: { color: safeEvent.value.styles.accentColor } }, getMonth(safeEvent.value.dateISO))
+            safeEvent.value.detallesSubtitulo ? h('span', { class: 'text-xl md:text-2xl tracking-widest mr-4', style: { color: safeEvent.value.styles.textSectionColor, fontFamily: safeEvent.value.detallesFonts?.subtitulo || 'inherit' } }, safeEvent.value.detallesSubtitulo) : null,
+            h('span', { class: 'text-6xl md:text-7xl font-serif mx-4', style: { color: safeEvent.value.styles.textSectionColor } }, getDay(safeEvent.value.dateISO)),
+            h('span', { class: 'text-xl md:text-2xl tracking-widest ml-4', style: { color: safeEvent.value.styles.textSectionColor } }, getMonth(safeEvent.value.dateISO))
           ]),
-          h('div', { class: 'w-full border-t', style: { borderColor: safeEvent.value.styles.accentColor } }),
-          h('div', { class: 'text-2xl md:text-3xl mt-2', style: { color: safeEvent.value.styles.accentColor } }, getYear(safeEvent.value.dateISO))
+          h('div', { class: 'w-full border-t', style: { borderColor: safeEvent.value.styles.textSectionColor } }),
+          h('div', { class: 'text-2xl md:text-3xl mt-2', style: { color: safeEvent.value.styles.textSectionColor } }, getYear(safeEvent.value.dateISO))
         ])
       ])
     }
@@ -585,17 +607,17 @@ const sectionRenderers = [
         return h('section', {
           style: {
             background: props.sectionIndex % 2 === 0 ? safeEvent.value.styles.bgColor : safeEvent.value.styles.bgSectionColor,
-            color: safeEvent.value.styles.accentColor || '#b97b7b'
+            color: safeEvent.value.styles.textSectionColor || '#b97b7b'
           },
           class: 'py-20 px-6 text-center'
         }, [
           h('div', { class: 'flex flex-col items-center mb-8' }, [
             h('svg', { width: '60', height: '60', fill: 'none', viewBox: '0 0 60 60', class: 'mb-4' }, [
-              h('circle', { cx: '30', cy: '30', r: '28', stroke: '#b97b7b', 'stroke-width': '3', fill: 'none' }),
-              h('path', { d: 'M20 32l7 7 13-13', stroke: '#b97b7b', 'stroke-width': '3', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }),
-              h('circle', { cx: '45', cy: '15', r: '2', fill: '#e2c6b7' }),
-              h('circle', { cx: '15', cy: '45', r: '1.5', fill: '#e2c6b7' }),
-              h('circle', { cx: '40', cy: '45', r: '1.5', fill: '#e2c6b7' })
+              h('circle', { cx: '30', cy: '30', r: '28', stroke: safeEvent.value.styles.textSectionColor, 'stroke-width': '3', fill: 'none' }),
+              h('path', { d: 'M20 32l7 7 13-13', stroke: safeEvent.value.styles.textSectionColor, 'stroke-width': '3', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }),
+              h('circle', { cx: '45', cy: '15', r: '2', fill: safeEvent.value.styles.textSectionColor }),
+              h('circle', { cx: '15', cy: '45', r: '1.5', fill: safeEvent.value.styles.textSectionColor }),
+              h('circle', { cx: '40', cy: '45', r: '1.5', fill: safeEvent.value.styles.textSectionColor })
             ]),
             h('div', [
               h('div', {
@@ -619,8 +641,8 @@ const sectionRenderers = [
           h('a', {
             href: whatsappLink.value,
             target: '_blank',
-            class: 'inline-block border border-[#b97b7b] px-8 py-3 rounded  hover:bg-[#b97b7b] hover:text-white transition font-semibold',
-            style: { fontFamily: safeEvent.value.confirmacionFonts?.boton || 'inherit' }
+            class: 'inline-block border px-8 py-3 rounded  hover:bg-[safeEvent.value.styles.textSectionColor] hover:text-white transition font-semibold',
+            style: { fontFamily: safeEvent.value.confirmacionFonts?.boton || 'inherit', borderColor: safeEvent.value.styles.textSectionColor }
           }, 'CONFIRMA AQUÍ')
         ])
       }
