@@ -25,7 +25,7 @@ const event = ref(null)
 const TemplateComponent = shallowRef(null)
 
 onMounted(async () => {
-  const querySnapshot = await getDocs(collection(db, 'invitaciones'))
+  const querySnapshot = await getDocs(collection(db, 'events'))
   const events = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
   const found = events.find(e => e.slug === slug)
   if (!found) {
